@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Has Atelier · Instagram bağlantısı</title>
+<style>
+  body { font: 16px/1.5 -apple-system, system-ui, sans-serif; background: #f6f1e9; color: #2b2426; margin: 0; padding: 48px 16px; }
+  main { max-width: 480px; margin: 0 auto; }
+  a { color: #6B1F2A; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Panele dönülüyor…</h1>
+  <p id="m">Instagram onayı alındı, Has Atelier paneline yönlendiriliyorsun. Panel bu bilgisayarda açık olmalı.</p>
+</main>
+<script>
+  // Instagram (Meta) dönüş adresi https olmak zorunda; panel yerelde (http://127.0.0.1:<port>). Bu sayfa kodu panele aktarır,
+  // hiçbir şey kaydetmez. Port panelin ürettiği state'in başında durur ("5055.ab12…").
+  var q = new URLSearchParams(location.search);
+  var port = (q.get("state") || "").split(".")[0];
+  if (!/^\d{2,5}$/.test(port)) port = "5055";
+  var hedef = "http://127.0.0.1:" + port + "/instagram/baglandi" + location.search;
+  var a = document.createElement("a");
+  a.href = hedef;
+  a.textContent = "Olmazsa buraya tıkla.";
+  document.getElementById("m").append(" ", a);
+  location.replace(hedef);
+</script>
+</body>
+</html>
